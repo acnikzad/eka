@@ -2,7 +2,6 @@ const pool = require("../db");
 
 const teacherController = {
   async getAllTeachers(req, res) {
-    console.log("GETTING TEACHERS");
     try {
       const { rows } = await pool.query("SELECT * FROM teachers");
       res.json(rows);

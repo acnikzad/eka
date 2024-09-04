@@ -2,7 +2,6 @@ const pool = require("../db");
 
 const classController = {
   async getAllClasses(req, res) {
-    console.log("Fetching all classes...");
     try {
       const { rows } = await pool.query("SELECT * FROM classes");
       res.json(rows);
@@ -17,7 +16,6 @@ const classController = {
     if (!ids) {
       return res.status(400).json({ error: "No teacher IDs provided" });
     }
-
     const teacherIds = ids.split(",").map((id) => parseInt(id));
 
     try {

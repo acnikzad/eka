@@ -5,8 +5,6 @@ const classController = require("../controllers/classController");
 router.get("/", classController.getAllClasses);
 router.get("/:id", classController.getClassById);
 router.post("/", classController.createClass);
-router.put("/:id", classController.updateClass);
-router.delete("/:id", classController.deleteClass);
 router.get("/:id/students", classController.getStudentsByClass);
 
 module.exports = router;

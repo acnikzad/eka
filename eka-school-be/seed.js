@@ -163,10 +163,13 @@ const colors = [
   "#a0c4ff",
   "#bdb2ff",
   "#ffc6ff",
+  "#ffb5a7",
+  "#c1fba4",
 ];
 
 async function seedDatabase() {
   try {
+    // Clear existing data
     await pool.query("DELETE FROM class_students");
     await pool.query("DELETE FROM classes");
     await pool.query("DELETE FROM students");
@@ -175,9 +178,9 @@ async function seedDatabase() {
     const teachers = [];
     for (let i = 0; i < 10; i++) {
       const firstName = f_names[Math.floor(Math.random() * f_names.length)];
-      const lastName = l_names[Math.floor(Math.random() * l_names.length)];
+      const lastName = l_names[Math.floor(Math.random() * f_names.length)];
       const name = `${firstName} ${lastName}`;
-      const color = colors[i % colors.length];
+      const color = colors[i];
       const result = await pool.query(
         "INSERT INTO teachers (name, color) VALUES ($1, $2) ON CONFLICT DO NOTHING RETURNING id, color",
         [name, color]
@@ -205,7 +208,7 @@ async function seedDatabase() {
 
     for (let i = 0; i < 300; i++) {
       const firstName = f_names[Math.floor(Math.random() * f_names.length)];
-      const lastName = l_names[Math.floor(Math.random() * l_names.length)];
+      const lastName = l_names[Math.floor(Math.random() * f_names.length)];
       const name = `${firstName} ${lastName}`;
       const result = await pool.query(
         "INSERT INTO students (name) VALUES ($1) ON CONFLICT DO NOTHING RETURNING id",
