@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    container_name: eka_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: eka_school
+    volumes:
+      - ./eka-school-be/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./eka-school-be
+      dockerfile: Dockerfile
+    container_name: eka_backend
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: eka_school
+      DB_PORT: 5432
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./eka-school-be:/app
+    command: ["sh", "-c", "sleep 20 && node seed.js && npm start"]
+
+  frontend:
+    build:
+      context: ./eka-school-fe
+      dockerfile: Dockerfile
+    container_name: eka_frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./eka-school-fe:/app
+    command: ["npm", "start"]
