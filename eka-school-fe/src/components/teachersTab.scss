@@ -1,0 +1,43 @@
+.roster-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Reduces the space between columns */
+}
+
+.roster-column {
+  flex: 1; /* Ensures each column takes up equal space */
+}
+
+.card {
+  margin-bottom: 2px;
+  padding: 0.1rem; /* Makes the card smaller */
+  font-size: 0.55rem; /* Reduces the font size inside cards */
+  line-height: 0.2rem; /* Makes the text more compact */
+}
+
+.teacher-card,
+.class-card,
+.student-card {
+  font-size: 20 px;
+  padding: 0.75rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.selected {
+  background-color: #dff0d8; /* Light green */
+  border-color: #d6e9c6;
+}
+
+.teacher-card,
+.class-card,
+.student-card {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.teacher-card:hover,
+.class-card:hover,
+.student-card:hover {
+  background-color: #f5f5f5; /* Light gray for hover effect */
+}
